@@ -1,0 +1,4 @@
+/Plack-App-FakeApache1*.tar.gz
+/Plack-App-FakeApache1*/
+/.build/
+.*sw?
