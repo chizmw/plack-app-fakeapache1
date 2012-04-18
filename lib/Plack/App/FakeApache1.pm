@@ -24,7 +24,6 @@ sub call {
     );
     $fake_req->status( HTTP_OK );
 
-$DB::single = 1;
 
     my $handler;
     if ( blessed $self->handler ) {
