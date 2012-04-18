@@ -1,5 +1,8 @@
 package Plack::App::FakeModPerl1;
-use NAP::policy 'class';
+use feature ':5.10';
+use Moose;
+
+use Carp;
 use HTTP::Status qw(:constants :is status_message);
 
 =pod BORROWED HEAVILY FROM
@@ -125,3 +128,5 @@ sub finalize {
 }
 
 __PACKAGE__->meta->make_immutable( inline_constructor => 0 );
+
+1;

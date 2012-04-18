@@ -9,7 +9,6 @@ use Apache::ConfigParser;
 use Data::Printer;
 use TryCatch;
 use HTTP::Status qw(:constants :is status_message);
-use lib $ENV{XTDC_BASE_DIR} . qw( /lib );
 
 has config_file_name => (
     is          => 'rw',

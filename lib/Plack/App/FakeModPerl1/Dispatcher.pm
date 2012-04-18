@@ -1,18 +1,17 @@
 package Plack::App::FakeModPerl1::Dispatcher;
-use NAP::policy 'class';
+use feature ':5.10';
+use Moose;
 
 use Apache::ConfigParser;
 use Data::Printer;
 use TryCatch;
 use HTTP::Status qw(:constants :is status_message);
-use lib $ENV{XTDC_BASE_DIR} . qw( /lib );
 
 has config_file_name => (
     is  => 'rw',
     isa => 'Str',
     default => sub {
-          $ENV{XTDC_BASE_DIR}
-        . '/conf/xt_location.conf'
+        '/etc/myapp/apache_locations.conf'
     },
 );
 
@@ -227,3 +226,5 @@ sub _location_to_regexp {
 }
 
 __PACKAGE__->meta->make_immutable;
+
+1;

@@ -1,5 +1,6 @@
 package Plack::App::FakeModPerl1::Server;
-use NAP::policy;
+use feature ':5.10';
+use Carp;
 
 sub new {
     my $class = shift;
@@ -24,3 +25,5 @@ sub dir_config {
     # Otherwise, we might want to provide some sort of support (which Apache is still around)
     return $self->{env}->{"wg.DIR_CONFIG.$c"};
 }
+
+1;
