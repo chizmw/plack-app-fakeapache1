@@ -4,6 +4,7 @@ use Moose;
 use HTTP::Status qw(:is :constants);
 use Plack::Request;
 use Plack::Response;
+use Plack::App::FakeApache1::Dispatcher;
 
 my $NS = "plack.app.fakeapache";
 
@@ -36,6 +37,11 @@ has plack_response => (
         content_encoding    => 'content_encoding',
         status              => 'status',
     },
+);
+
+has dispatcher => (
+    is          => 'ro',
+    lazy_build  => 1,
 );
 
 # Apache related attributes
@@ -81,6 +87,7 @@ sub _build_plack_response { return Plack::Response->new( HTTP_OK, {}, [] ) }
 sub _build_headers_out     { return Moose::APR::Table->new; }
 sub _build_err_headers_out { return Moose::APR::Table->new; }
 sub _build__subprocess_env { return Moose::APR::Table->new; }
+sub _build_dispatcher      { return Plack::App::FakeApache1::Dispatcher->new; }
 
 # Plack methods
 sub finalize { 

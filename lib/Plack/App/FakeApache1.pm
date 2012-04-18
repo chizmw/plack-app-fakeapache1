@@ -15,17 +15,16 @@ use Carp;
 use HTTP::Status qw(:constants);
 use Scalar::Util qw( blessed );
 
-our $VERSION = 0.02;
-
 sub call {
     my ($self, $env) = @_;
 
     my $fake_req = Plack::App::FakeApache1::Request->new(
-        env => $env,
-        dir_config => $self->dir_config,
+        env         => $env,
+        dir_config  => $self->dir_config,
     );
     $fake_req->status( HTTP_OK );
 
+$DB::single = 1;
 
     my $handler;
     if ( blessed $self->handler ) {
