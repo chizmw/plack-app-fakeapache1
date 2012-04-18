@@ -16,12 +16,16 @@ use Plack::App::FakeModPerl1::Server;
 no Moose;
 
 sub handle_psgi {
-    my $env = shift;
+    my $env         = shift;
+    my $config_file = shift;
     my $plack = Plack::App::FakeModPerl1->new( env => $env );
     my $session = $env->{'psgix.session'};
 
     # derive where to dispatch to based on <Location>s in apache config
-    my $dispatcher = Plack::App::FakeModPerl1::Dispatcher->new( debug => $ENV{PLACK_DEBUG} // 0 );
+    my $dispatcher = Plack::App::FakeModPerl1::Dispatcher->new(
+        debug               => $ENV{PLACK_DEBUG} // 0,
+        config_file_name    => $config_file,
+    );
     $dispatcher->dispatch_for( $plack );
 
     # let Plack::Response do its thing
