@@ -112,7 +112,6 @@ sub finalize {
     }
     else {
         if ($response->status == HTTP_OK) {
-            say 'NO BODY';
             $response->status(HTTP_NOT_FOUND);
         }
     }
