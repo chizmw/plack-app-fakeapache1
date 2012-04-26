@@ -5,6 +5,10 @@ use Moose;
 use Carp;
 use HTTP::Status qw(:constants :is status_message);
 
+use Package::DeprecationManager -deprecations => {
+    'Plack::App::FakeModPerl1::send_http_header'    => '0.0.1',
+};
+
 =pod BORROWED HEAVILY FROM
 
 L<https://github.com/pdonelan/webgui/blob/plebgui/lib/WebGUI/Session/Plack.pm>
@@ -60,7 +64,7 @@ sub AUTOLOAD {
     carp "!!plack->$what(@_)" unless $what eq 'DESTROY';
 }
 
-# Emulate/delegate/fake Apache2::* subs
+# Emulate/delegate/fake Apache::* subs
 sub         uri { shift->{request}->request_uri(@_) }
 sub       param { shift->{request}->param(@_) }
 sub      params { shift->{request}->params(@_) }
@@ -77,6 +81,21 @@ sub  dir_config { shift->{server}->dir_config(@_) }
 sub status_line { }
 sub   auth_type { } # should we support this?
 sub     handler {'perl-script'} # or not..?
+
+# in Apache1/MP1 you'll see people doing something like:
+#    $r->send_http_header( 'text/html' );
+# Whilst horrible it was 'valid', and we can support this by setting the
+# content type header for them
+#
+# to be safe we should probably only do this if we have one argument passed
+sub send_http_header {
+    deprecated( 'use ->content_type(..) instead' );
+    my $self = shift;
+
+    if (1 == scalar @_) {
+        return $self->content_type( $_[0] );
+    }
+}
 
 sub parsed_uri {
     my $self = shift;
