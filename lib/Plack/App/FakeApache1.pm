@@ -24,7 +24,6 @@ sub call {
     );
     $fake_req->status( HTTP_OK );
 
-
     my $handler;
     if ( blessed $self->handler ) {
         $handler = sub { $self->handler->handler( $fake_req ) };

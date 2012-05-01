@@ -3,7 +3,7 @@ use feature ':5.10';
 use Moose;
 
 use Apache::ConfigParser;
-use Data::Printer;
+use Carp;
 use TryCatch;
 use HTTP::Status qw(:constants :is status_message);
 
@@ -98,6 +98,9 @@ sub dispatch_for {
                 # no point continuing if we've been asked to redirect
                 return
                     if is_redirect($plack->{response}{status});
+                # no point continuing if we've had an error
+                return
+                    if is_server_error($plack->{response}{status});
             }
         }
         return;
@@ -177,10 +180,14 @@ sub _call_handler {
         }
     }
     catch ($e) {
-        warn "$module->handler(): $e";
+        Carp::cluck( "$module->handler(): $e" );
+        $res = HTTP_INTERNAL_SERVER_ERROR;
     }
 
-    return $res;
+    # if we haven't set it to anything explicitly, assume we're 'OK'
+    $plack->{response}{status} = $res || HTTP_OK;
+
+    return $plack->{response}{status};
 }
 
 sub _build_dispatches {
