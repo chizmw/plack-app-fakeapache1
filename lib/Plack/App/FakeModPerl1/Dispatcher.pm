@@ -185,7 +185,9 @@ sub _call_handler {
     }
 
     # if we haven't set it to anything explicitly, assume we're 'OK'
-    $plack->{response}{status} = $res || HTTP_OK;
+    # be careful not to nuke anything that has already been set
+    $plack->{response}{status} = ($res || HTTP_OK)
+        if (not defined $plack->{response}{status});
 
     return $plack->{response}{status};
 }
