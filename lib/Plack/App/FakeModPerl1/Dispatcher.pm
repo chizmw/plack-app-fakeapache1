@@ -181,7 +181,8 @@ sub _call_handler {
     }
     catch ($e) {
         Carp::cluck( "$module->handler(): $e" );
-        $res = HTTP_INTERNAL_SERVER_ERROR;
+        # if we error we override the status of everything up to this point!
+        return $plack->{response}{status} = HTTP_INTERNAL_SERVER_ERROR;
     }
 
     # if we haven't set it to anything explicitly, assume we're 'OK'
