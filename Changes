@@ -1,5 +1,17 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+ - Fix response status with internal server error
+ - Better treatment of $plack->{response}{status}
+ - More sentible behaviour on server/code error
+ - Add support for send_http_header()
+ - Remove pointless 'NO BODY' output
+ - Remove debugger breakpoint
+ - handle_psgi() takes apache config file argument
+ - Remove company-specific modules, env-vars
 
- - Initial release
+v0.0.1_01   Wed Apr 18 10:10:26 2012 +0100
+ - Add factored out modules from $myapp
+ - Switch Kwalitee test pluding used with dzil
+ - Continue ripping off Plack::App::FakeApache
+ - Post-minting Initial Commit
