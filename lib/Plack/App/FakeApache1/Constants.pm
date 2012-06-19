@@ -13,7 +13,12 @@ use Sub::Exporter -setup => {
 
 # useful values from httpd.h
 # added on a 'needed to use' basis
+
+# 3xx status codes
 sub HTTP_MOVED_TEMPORARILY  { 302; }
+
+# 4xx status codes
+sub HTTP_METHOD_NOT_ALLOWED { 405; }
 
 sub DONE        { -2; }
 sub DECLINED    { -1; }

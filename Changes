@@ -1,6 +1,7 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+ - Add constant: HTTP_METHOD_NOT_ALLOWED (405)
  - Fix response status with internal server error
  - Better treatment of $plack->{response}{status}
  - More sentible behaviour on server/code error
