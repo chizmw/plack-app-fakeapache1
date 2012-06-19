@@ -3,11 +3,22 @@ use strict;
 use warnings;
 
 use Sub::Exporter -setup => {
-    exports => [ qw/OK DONE DECLINED REDIRECT/ ],
+    exports => [ qw/
+        OK
+        DONE
+        DECLINED
+        REDIRECT
+
+        HTTP_MOVED_TEMPORARILY
+
+        HTTP_METHOD_NOT_ALLOWED
+    / ],
     groups => {
         default => [ qw/OK/ ],
         common  => [ qw/OK DONE DECLINED REDIRECT/ ],
         http    => [ qw/HTTP_MOVED_TEMPORARILY/ ],
+        '3xx'   => [ qw/HTTP_MOVED_TEMPORARILY/ ],
+        '4xx'   => [ qw/HTTP_METHOD_NOT_ALLOWED/ ],
     },
 };
 
