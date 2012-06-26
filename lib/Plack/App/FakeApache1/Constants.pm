@@ -9,6 +9,8 @@ use Sub::Exporter -setup => {
         DECLINED
         REDIRECT
 
+        HTTP_OK
+
         HTTP_MOVED_TEMPORARILY
 
         HTTP_BAD_REQUEST
@@ -37,6 +39,7 @@ use Sub::Exporter -setup => {
         default => [ qw/OK/ ],
         common  => [ qw/OK DONE DECLINED REDIRECT/ ],
         http    => [ qw/HTTP_MOVED_TEMPORARILY/ ],
+        '2xx'   => [ qw/HTTP_OK/ ],
         '3xx'   => [ qw/HTTP_MOVED_TEMPORARILY/ ],
         '4xx'   => [ qw/
                         HTTP_BAD_REQUEST
@@ -66,6 +69,9 @@ use Sub::Exporter -setup => {
 
 # useful values from httpd.h
 # added on a 'needed to use' basis
+
+# 2xx status codes
+sub HTTP_OK                            { 200; }
 
 # 3xx status codes
 sub HTTP_MOVED_TEMPORARILY             { 302; }
