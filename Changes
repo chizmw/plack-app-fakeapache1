@@ -1,6 +1,7 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+ - add remaning 4xx status codes
 
 0.0.1_04  2012-06-20 10:16:03 Europe/London
  - add [AutoPrereqs] plugin
