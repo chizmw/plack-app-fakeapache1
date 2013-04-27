@@ -3,7 +3,7 @@ use strict;
 use warnings;
 use Moose;
 
-use feature ':5.10';
+use 5.10.1;
 
 use Apache::ConfigParser;
 use Data::Printer;

@@ -1,5 +1,5 @@
 package Plack::App::FakeModPerl1::Dispatcher;
-use feature ':5.10';
+use 5.10.1;
 use Moose;
 
 use Apache::ConfigParser;
