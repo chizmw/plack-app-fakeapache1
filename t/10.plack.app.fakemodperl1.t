@@ -115,4 +115,43 @@ is(
     'exhausted expected dispatch data list'
 );
 
+use Data::Printer alias=>'dpp';
+# check the 'prepared location' hash for URIs
+my @location_for_tests = (
+    {
+        uri                 => '/ajax/something_magic',
+
+        handlers            => ['perlhandler'],
+        perlhandler_list    => ['Test::FakedApp::AJAX']
+    },
+    {
+        uri                 => '/FakedApp',
+
+        handlers            => ['perlhandler'],
+        perlhandler_list    => ['Test::FakedApp']
+    }
+);
+
+while (my $location_test_data = shift @location_for_tests) {
+    my $uri = $location_test_data->{uri};
+    subtest "Location config for $uri" => sub {
+        my %location_config = %{ $pafmp1d->_prepare_location_config_for( $uri ) };
+        diag dpp(%location_config);
+
+        my @handlers  = $location_test_data->{handlers};
+        foreach my $handler (@handlers) {
+            ok(
+                exists $location_config{$handler . '_list'},
+                "expected handler type exists: $handler",
+            );
+            cmp_bag(
+                $location_config{$handler},
+                $location_test_data->{$handler . '_list'},
+                "correct handler classes: " .
+                    join(',', @{$location_test_data->{$handler . '_list'}})
+            );
+        }
+    };
+}
+
 done_testing;
