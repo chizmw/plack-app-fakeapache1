@@ -2,6 +2,8 @@ package Plack::App::FakeApache1::Handler;
 use strict;
 use warnings;
 
+use Carp;
+
 # borrowed heavily from
 #  http://cpansearch.perl.org/src/MIYAGAWA/Plack-0.9946/lib/Plack/Handler/Apache2.pm
 
@@ -31,6 +33,9 @@ sub load_app {
 
 sub call_app {
     my ($class, $r, $app) = @_;
+
+    Carp::croak('$app is undefined')
+        unless defined $app;
 
     $r->subprocess_env; # let Apache create %ENV for us :)
 
