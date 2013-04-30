@@ -1,6 +1,23 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+
+This is a clean-up-and-improve release. A number of issues arose in final
+stages of a conversion from AP1 - dispatcher logic, strange things, lack of
+tests. Some of these issues have started to be addressed here.
+
+ - Replace 'use feature :5.10' with 'use 5.10.1'
+ - Fix up dispatch behaviour
+ - Disable half-finished tests
+ - Start writing dispatcher-location test
+ - Add t/50-app test and data
+ - Add tests for ::FakeModPerl1::Dispatcher
+ - Make AP1 Handler croak if we don't have a $app
+ - Add simple Plack::App::FakeApache1 test
+ - Switch to the FakeModPerl1 dispatcher
+ - Remove 'mostly duped and dead' module
+
+0.0.1  2013-04-23 11:09:14 Europe/London
  - No functional changes; releasing as v0.0.1
 
 0.0.1_05 2012-06-26 10:51:14 Europe/London
