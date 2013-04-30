@@ -2,9 +2,9 @@ Revision history for {{$dist->name}}
 
 {{$NEXT}}
 
-This is a clean-up-and-improve release. A number of issues arose in final
-stages of a conversion from AP1 - dispatcher logic, strange things, lack of
-tests. Some of these issues have started to be addressed here.
+ This is a clean-up-and-improve release. A number of issues arose in final
+ stages of a conversion from AP1 - dispatcher logic, strange things, lack of
+ tests. Some of these issues have started to be addressed here.
 
  - Replace 'use feature :5.10' with 'use 5.10.1'
  - Fix up dispatch behaviour
