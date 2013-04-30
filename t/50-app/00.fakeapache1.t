@@ -23,6 +23,8 @@ isa_ok($faked_apache1, 'Plack::App::FakeApache1');
 my $faked_app = $faked_apache1->to_app;
 isa_ok($faked_app, 'CODE');
 
+=for later
+
 test_psgi
     app => $faked_app,
 
@@ -32,6 +34,8 @@ test_psgi
         my $res = $cb->($req);
         like $res->content, qr/Hello World/;
     };
+
+=cut
 
 
 done_testing;

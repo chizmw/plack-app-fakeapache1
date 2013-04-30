@@ -4,8 +4,9 @@ use Moose;
 
 use Apache::ConfigParser;
 use Carp;
+use Data::Dump 'pp';
 use TryCatch;
-use HTTP::Status qw(:constants :is status_message);
+use Plack::App::FakeApache1::Constants qw/:common :2xx :4xx :5xx/;
 
 has config_file_name => (
     is  => 'rw',
@@ -85,22 +86,55 @@ sub dispatch_for {
         my @handler_order =
             qw(perlinithandler perlhandler perlloghandler perlcleanuphandler);
 
+        HANDLER_TYPE:
         foreach my $handler_type (@handler_order) {
             next
                 unless exists($location_config{$handler_type});
 
+            my $ok_count = 0;
+
             my @handlers = @{ $location_config{$handler_type} };
             say "$handler_type: @handlers"
                 if $self->debug;
+
+            HANDLER_MODULE:
             foreach my $module (@handlers) {
                 $self->_require_handler_module($module);
-                $self->_call_handler($plack, $module);
-                # no point continuing if we've been asked to redirect
-                return
-                    if is_redirect($plack->{response}{status});
-                # no point continuing if we've had an error
-                return
-                    if is_server_error($plack->{response}{status});
+                my $handler_response = $self->_call_handler($plack, $module);
+                if (not defined $handler_response) {
+                    die "$module did not return a defined response";
+                }
+
+                # https://metacpan.org/module/GOZER/mod_perl-1.31/faq/mod_perl_api.pod#How-can-I-terminate-a-chain-of-handlers
+                if (
+                    $handler_type eq 'perlhandler'
+                        and
+                    !(
+                        $handler_response == OK
+                            or
+                        $handler_response == DECLINED
+                    )
+                ) {
+                    # set the HTTP response code
+                    $plack->{response}{status} = $handler_response;
+                    # stop processing PerlHandlers
+                    next HANDLER_TYPE;
+                }
+
+                $ok_count++
+                    if $handler_response == OK;
+            }
+
+            # if we just ran through *all* of the PerlHandlers and didn't have
+            # problems (and didn't decline everything) we should 'convert' to
+            # an HTTP_OK
+            if($handler_type eq 'perlhandler') {
+                if ($ok_count) {
+                    $plack->{response}{status} = HTTP_OK;
+                }
+                else {
+                    $plack->{response}{status} = HTTP_NOT_ACCEPTABLE;
+                }
             }
         }
         return;
@@ -138,7 +172,7 @@ sub _prepare_location_config_for {
     foreach my $k (qw/location location_re/) {
         delete $location_config{$k};
     }
-    say p(%location_config) if $self->debug;
+    say pp(%location_config) if $self->debug;
 
     return \%location_config;
 }
@@ -182,15 +216,10 @@ sub _call_handler {
     catch ($e) {
         Carp::cluck( "$module->handler(): $e" );
         # if we error we override the status of everything up to this point!
-        return $plack->{response}{status} = HTTP_INTERNAL_SERVER_ERROR;
+        return HTTP_INTERNAL_SERVER_ERROR;
     }
 
-    # if we haven't set it to anything explicitly, assume we're 'OK'
-    # be careful not to nuke anything that has already been set
-    $plack->{response}{status} = ($res || HTTP_OK)
-        if (not defined $plack->{response}{status});
-
-    return $plack->{response}{status};
+    return $res;
 }
 
 sub _build_dispatches {

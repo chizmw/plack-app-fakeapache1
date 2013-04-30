@@ -34,6 +34,7 @@ use Sub::Exporter -setup => {
         HTTP_UNPROCESSABLE_ENTITY
         HTTP_LOCKED
         HTTP_FAILED_DEPENDENCY
+        HTTP_INTERNAL_SERVER_ERROR
     / ],
     groups => {
         default => [ qw/OK/ ],
@@ -64,6 +65,7 @@ use Sub::Exporter -setup => {
                         HTTP_LOCKED
                         HTTP_FAILED_DEPENDENCY
                      /],
+        '5xx'   => [ qw/HTTP_INTERNAL_SERVER_ERROR/ ],
     },
 };
 
@@ -98,6 +100,9 @@ sub HTTP_EXPECTATION_FAILED            { 417; }
 sub HTTP_UNPROCESSABLE_ENTITY          { 422; }
 sub HTTP_LOCKED                        { 423; }
 sub HTTP_FAILED_DEPENDENCY             { 424; }
+
+# 5xx status codes
+sub HTTP_INTERNAL_SERVER_ERROR         { 500; }
 
 sub DONE        { -2; }
 sub DECLINED    { -1; }

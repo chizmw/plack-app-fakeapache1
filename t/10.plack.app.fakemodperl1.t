@@ -132,6 +132,8 @@ my @location_for_tests = (
     }
 );
 
+=for later
+
 while (my $location_test_data = shift @location_for_tests) {
     my $uri = $location_test_data->{uri};
     subtest "Location config for $uri" => sub {
@@ -153,5 +155,7 @@ while (my $location_test_data = shift @location_for_tests) {
         }
     };
 }
+
+=cut
 
 done_testing;
