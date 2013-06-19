@@ -2,6 +2,8 @@ Revision history for {{$dist->name}}
 
 {{$NEXT}}
 
+0.0.2     2013-04-30 17:52:14 Europe/London
+
  This is a clean-up-and-improve release. A number of issues arose in final
  stages of a conversion from AP1 - dispatcher logic, strange things, lack of
  tests. Some of these issues have started to be addressed here.
