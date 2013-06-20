@@ -1,6 +1,8 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+
+0.0.3     2013-06-20 12:02:04 Europe/London
  - add missing 'use Plack::Util' (issue #2)
  - Update bugtracker to point to github
 
