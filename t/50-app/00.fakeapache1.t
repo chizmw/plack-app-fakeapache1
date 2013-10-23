@@ -9,7 +9,6 @@ use Plack::Test;
 use Plack::App::FakeApache1;
 
 use FindBin::libs;
-warn $FindBin::Bin;
 
 my $faked_apache1 = Plack::App::FakeApache1->new( 
     handler    => "Plack::App::FakeApache1::Handler",
