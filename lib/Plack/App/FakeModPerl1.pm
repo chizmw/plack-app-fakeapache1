@@ -104,7 +104,7 @@ sub parsed_uri {
     return URI::URL->new(
           $self->{env}{'psgi.url_scheme'}
         . q{://}
-        . $self->{env}{HTTP_HOST}
+        . ($self->{env}{HTTP_HOST} || $self->{env}{SERVER_NAME} || '')
         . $self->{env}{REQUEST_URI}
     );
 }
