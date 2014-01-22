@@ -1,6 +1,7 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+ - Fall back to SERVER_NAME if HTTP_HOST is not set (ilmari)
 
 0.0.3     2013-06-20 12:02:04 Europe/London
  - add missing 'use Plack::Util' (issue #2)
