@@ -1,4 +1,6 @@
 package Plack::App::FakeModPerl1::Server;
+use strict;
+use warnings;
 use 5.10.1;
 use Carp;
 
