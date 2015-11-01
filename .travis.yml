@@ -1,0 +1,27 @@
+sudo: false
+
+language: perl
+
+perl:
+    - "5.20"
+    - "5.18"
+    - "5.16"
+    - "5.14"
+    - "5.12"
+    - "5.10"
+
+install:
+    - cpanm Dist::Zilla
+    - dzil authordeps --missing | cpanm -n
+    - dzil listdeps --missing | cpanm -n
+
+script:
+    # work around an issue with the Git::CommitBuild Dist::Zilla plugin,
+    # which requires the git user to be configured on the Travis infrastructure
+    - git config --global user.email "fakeapache1@example.com"
+    - git config --global user.name "Plack App FakeApache1"
+    # install an implicit dependency of the PodCoverageTests plugin
+    - cpanm -n Pod::Coverage::TrustPod
+    # to be implemented once the --author and --release tests pass
+    #- dzil test --author --release
+    - dzil test --noauthor
