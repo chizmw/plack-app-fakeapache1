@@ -1,6 +1,6 @@
-#!perl
 use strict;
 use warnings;
+
 use Test::More;
 use Plack::App::FakeApache1;
 
