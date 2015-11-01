@@ -10,11 +10,14 @@ use Package::DeprecationManager -deprecations => {
     'Plack::App::FakeModPerl1::send_http_header'    => '0.0.1',
 };
 
-=pod BORROWED HEAVILY FROM
+=pod
+
+BORROWED HEAVILY FROM
 
 L<https://github.com/pdonelan/webgui/blob/plebgui/lib/WebGUI/Session/Plack.pm>
 
 =cut
+
 use Plack::App::FakeModPerl1::Dispatcher;
 use Plack::App::FakeModPerl1::Server;
 use Plack::Util;
