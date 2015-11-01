@@ -62,9 +62,9 @@ characters)
 Looking at:
 http://ertw.com/blog/2007/08/23/apache-and-overlapping-location-directives/
 
-So the general plan of action iis to process each match in order, and store
+So the general plan of action is to process each match in order, and store
 any new settings, potentially overriding existing ones.
-This appears to be how apache does it, and hasn't broken in any obvious ways
+This appears to be how Apache does it, and hasn't broken in any obvious ways
 yet.
 
 =cut
