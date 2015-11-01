@@ -39,7 +39,7 @@ can_ok($pafmp1d,
 # but we won't get far without specifying anything useful
 throws_ok {
     $parsed_config = $pafmp1d->parsed_apache_config;
-} qr{cannot stat '/etc/myapp/apache_locations.conf': No such file or directory},
+} qr{cannot stat '/etc/myapp/apache_locations.conf':},
     'died with call to parsed_apache_config()';
 
 # now build one that has an apache config that exists
