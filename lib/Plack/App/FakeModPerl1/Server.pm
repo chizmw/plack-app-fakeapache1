@@ -1,4 +1,5 @@
 package Plack::App::FakeModPerl1::Server;
+# ABSTRACT: Mimic Apache mod_perl1's server
 use strict;
 use warnings;
 use 5.10.1;

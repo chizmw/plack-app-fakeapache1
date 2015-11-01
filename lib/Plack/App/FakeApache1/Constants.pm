@@ -1,4 +1,5 @@
 package Plack::App::FakeApache1::Constants;
+# ABSTRACT: Define Apache1 constants
 use strict;
 use warnings;
 
