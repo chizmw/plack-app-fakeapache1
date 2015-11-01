@@ -1,4 +1,5 @@
 package Plack::App::FakeApache1::Request;
+# ABSTRACT: Mimic Apache1 requests
 use Moose;
 
 use HTTP::Status qw(:is :constants);

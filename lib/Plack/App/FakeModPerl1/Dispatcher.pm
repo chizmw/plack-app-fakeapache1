@@ -1,4 +1,5 @@
 package Plack::App::FakeModPerl1::Dispatcher;
+# ABSTRACT: Mimic Apache mod_perl1's dispatcher
 use 5.10.1;
 use Moose;
 
