@@ -216,7 +216,7 @@ sub _call_handler {
         }
     }
     catch ($e) {
-        Carp::cluck( "$module->handler(): $e" );
+        Carp::confess( "$module->handler(): $e" );
         # if we error we override the status of everything up to this point!
         return HTTP_INTERNAL_SERVER_ERROR;
     }
