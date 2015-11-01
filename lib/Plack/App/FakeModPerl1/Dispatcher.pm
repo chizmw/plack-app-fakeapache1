@@ -67,6 +67,7 @@ This appears to be how apache does it, and hasn't broken in any obvious ways
 yet.
 
 =cut
+
 sub dispatch_for {
     my $self    = shift;
     my $plack   = shift;
