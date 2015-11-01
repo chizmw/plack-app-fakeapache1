@@ -10,7 +10,7 @@ use Plack::App::FakeApache1;
 
 use FindBin::libs;
 
-my $faked_apache1 = Plack::App::FakeApache1->new( 
+my $faked_apache1 = Plack::App::FakeApache1->new(
     handler    => "Plack::App::FakeApache1::Handler",
     dir_config => {
         psgi_app        => $FindBin::Bin . '/testapp.psgi',

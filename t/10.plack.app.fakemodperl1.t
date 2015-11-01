@@ -86,7 +86,7 @@ while (my $dispatch_data = shift @dispatches) {
         $expected_data->{handles},
     );
     subtest $subtest_name => sub {
-        ok( 
+        ok(
             defined $expected_data,
             'we have expected data for the current dispatch'
         );
