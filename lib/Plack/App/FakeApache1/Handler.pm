@@ -72,7 +72,7 @@ sub call_app {
 }
 
 # Plack methods
-sub finalize { 
+sub finalize {
     my $self     = shift;
     my $response = $self->plack_response;
 

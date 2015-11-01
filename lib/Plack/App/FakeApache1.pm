@@ -38,10 +38,10 @@ sub call {
         }
     }
 
-    my $result = $handler->( $fake_req ); 
-    
+    my $result = $handler->( $fake_req );
+
     if ( $result != OK ) {
-        $fake_req->status( $result );    
+        $fake_req->status( $result );
     }
 
     return $fake_req->finalize;

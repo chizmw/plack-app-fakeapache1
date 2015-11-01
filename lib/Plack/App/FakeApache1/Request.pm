@@ -90,7 +90,7 @@ sub _build__subprocess_env { return Moose::APR::Table->new; }
 sub _build_dispatcher      { return Plack::App::FakeModPerl1::Dispatcher->new; }
 
 # Plack methods
-sub finalize { 
+sub finalize {
     my $self     = shift;
     my $response = $self->plack_response;
 
