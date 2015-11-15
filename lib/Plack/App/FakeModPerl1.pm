@@ -1,4 +1,5 @@
 package Plack::App::FakeModPerl1;
+
 # ABSTRACT: Mimic Apache's mod_perl1
 use 5.10.1;
 use Moose;

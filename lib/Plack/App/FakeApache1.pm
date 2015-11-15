@@ -1,4 +1,5 @@
 package Plack::App::FakeApache1;
+
 # ABSTRACT: Perl distro to aid in mod_perl1->PSGI migration
 use strict;
 use warnings;

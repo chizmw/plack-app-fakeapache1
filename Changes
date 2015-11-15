@@ -5,6 +5,7 @@ Revision history for {{$dist->name}}
 0.0.4     2014-01-22 11:35:18 Europe/London
  - Fall back to SERVER_NAME if HTTP_HOST is not set (ilmari)
  - Add 'strict' to FakeModPerl1::Server
+ - Resolve "[PkgVersion] no blank line for $VERSION after package" with dzil prep
 
 0.0.3     2013-06-20 12:02:04 Europe/London
  - add missing 'use Plack::Util' (issue #2)

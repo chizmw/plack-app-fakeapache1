@@ -1,4 +1,5 @@
 package Plack::App::FakeApache1::Handler;
+
 # ABSTRACT: Mimic Apache's handler
 use strict;
 use warnings;

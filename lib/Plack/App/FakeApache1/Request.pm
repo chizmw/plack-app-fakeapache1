@@ -1,4 +1,5 @@
 package Plack::App::FakeApache1::Request;
+
 # ABSTRACT: Mimic Apache1 requests
 use Moose;
 
@@ -143,6 +144,7 @@ __PACKAGE__->meta->make_immutable;
 
 
 package Moose::APR::Table;
+
 use Moose;
 no Moose;
 
