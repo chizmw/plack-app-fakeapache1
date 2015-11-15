@@ -6,6 +6,8 @@ Revision history for {{$dist->name}}
  - Fall back to SERVER_NAME if HTTP_HOST is not set (ilmari)
  - Add 'strict' to FakeModPerl1::Server
  - Resolve "[PkgVersion] no blank line for $VERSION after package" with dzil prep
+ - add skeleton POD for methods
+   unhelpfully empty but keeps pod-coverage tests happy
 
 0.0.3     2013-06-20 12:02:04 Europe/London
  - add missing 'use Plack::Util' (issue #2)

@@ -16,8 +16,14 @@ use Plack::App::FakeApache1::Constants;
 
 my %apps; # psgi file to $app mapping
 
+=head2 new
+
+=cut
 sub new { bless{}, shift };
 
+=head2 handler
+
+=cut
 sub handler {
     my $class = __PACKAGE__;
     my $r     = shift;
@@ -25,6 +31,9 @@ sub handler {
     $class->call_app($r, $class->load_app($psgi));
 }
 
+=head2 load_app
+
+=cut
 sub load_app {
     my($class, $app) = @_;
     return $apps{$app} ||= do {
@@ -33,6 +42,9 @@ sub load_app {
     };
 }
 
+=head2 call_app
+
+=cut
 sub call_app {
     my ($class, $r, $app) = @_;
 
@@ -74,6 +86,9 @@ sub call_app {
 }
 
 # Plack methods
+=head2 finalize
+
+=cut
 sub finalize {
     my $self     = shift;
     my $response = $self->plack_response;
@@ -87,6 +102,9 @@ sub finalize {
 
 
 # The method for PH::Apache2::Regitsry to override.
+=head2 fixup_path
+
+=cut
 sub fixup_path {
     my ($class, $r, $env) = @_;
     my $vpath    = ($env->{SCRIPT_NAME} || '') . ($env->{PATH_INFO} || '');

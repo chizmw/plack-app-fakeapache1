@@ -92,6 +92,9 @@ sub _build__subprocess_env { return Moose::APR::Table->new; }
 sub _build_dispatcher      { return Plack::App::FakeModPerl1::Dispatcher->new; }
 
 # Plack methods
+=head2 finalize
+
+=cut
 sub finalize {
     my $self     = shift;
     my $response = $self->plack_response;
@@ -103,6 +106,9 @@ sub finalize {
 };
 
 # Apache methods
+=head2 subprocess_env
+
+=cut
 sub subprocess_env {
     my $self = shift;
 
@@ -119,6 +125,9 @@ sub subprocess_env {
     return;
 }
 
+=head2 print
+
+=cut
 sub print {
     my $self = shift;
 
@@ -137,6 +146,9 @@ sub _add_content {
     push @{ $self->plack_response->body }, @_;
 }
 
+=head2 rflush
+
+=cut
 sub rflush { 1; }
 
 __PACKAGE__->meta->make_immutable;

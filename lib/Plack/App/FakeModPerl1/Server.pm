@@ -6,6 +6,9 @@ use warnings;
 use 5.10.1;
 use Carp;
 
+=head2 new
+
+=cut
 sub new {
     my $class = shift;
     bless {@_}, $class;
@@ -19,6 +22,9 @@ sub AUTOLOAD {
     carp "!!server->$what(@_)" unless $what eq 'DESTROY';
 }
 
+=head2 dir_config
+
+=cut
 sub dir_config {
     my ( $self, $c ) = @_;
 

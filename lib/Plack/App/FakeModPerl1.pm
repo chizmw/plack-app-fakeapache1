@@ -25,6 +25,9 @@ use Plack::Util;
 
 no Moose;
 
+=head2 handle_psgi
+
+=cut
 sub handle_psgi {
     my $env         = shift;
     my $config_file = shift;
@@ -42,6 +45,9 @@ sub handle_psgi {
     return $plack->finalize;
 }
 
+=head2 new
+
+=cut
 sub new {
     my ( $class, %p ) = @_;
 
@@ -71,6 +77,39 @@ sub AUTOLOAD {
 }
 
 # Emulate/delegate/fake Apache::* subs
+=head2 uri
+
+=head2 param
+
+=head2 params
+
+=head2 headers_in
+
+=head2 headers_out
+
+=head2 protocol
+
+=head2 pnotes
+
+=head2 status
+
+=head2 sendfile
+
+=head2 server
+
+=head2 method
+
+=head2 upload
+
+=head2 dir_config
+
+=head2 status_line
+
+=head2 auth_type
+
+=head2 handler
+
+=cut
 sub         uri { shift->{request}->request_uri(@_) }
 sub       param { shift->{request}->param(@_) }
 sub      params { shift->{request}->params(@_) }
@@ -94,6 +133,9 @@ sub     handler {'perl-script'} # or not..?
 # content type header for them
 #
 # to be safe we should probably only do this if we have one argument passed
+=head2 send_http_header
+
+=cut
 sub send_http_header {
     deprecated( 'use ->content_type(..) instead' );
     my $self = shift;
@@ -103,6 +145,9 @@ sub send_http_header {
     }
 }
 
+=head2 parsed_uri
+
+=cut
 sub parsed_uri {
     my $self = shift;
     require URI::URL;
@@ -114,17 +159,26 @@ sub parsed_uri {
     );
 }
 
+=head2 content_type
+
+=cut
 sub content_type {
     my ( $self, $ct ) = @_;
     $self->{headers_out}->set( 'Content-Type' => $ct );
 }
 
 # TODO: I suppose this should do some sort of IO::Handle thing
+=head2 print
+
+=cut
 sub print {
     my $self = shift;
     push @{ $self->{body} }, @_;
 }
 
+=head2 finalize
+
+=cut
 sub finalize {
     my $self        = shift;
     my $response    = $self->{response};

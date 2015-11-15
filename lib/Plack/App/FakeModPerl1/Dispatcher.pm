@@ -70,6 +70,9 @@ yet.
 
 =cut
 
+=head2 dispatch_for
+
+=cut
 sub dispatch_for {
     my $self    = shift;
     my $plack   = shift;
