@@ -2,12 +2,25 @@ Revision history for {{$dist->name}}
 
 {{$NEXT}}
 
-0.0.4     2014-01-22 11:35:18 Europe/London
- - Fall back to SERVER_NAME if HTTP_HOST is not set (ilmari)
- - Add 'strict' to FakeModPerl1::Server
+ - Merged pull-requests from Paul Cochrane:
+   - #6 replace NoTabsTests
+   - #7 add missing abstracts (for dzil)
+   - #8 add Travis config
+   - #9 purge trailing whitespace
+   - #10 fix POD errors
+   - #11 update dist.ini
+   - #12 add missing strictures
+   - #13 remove shebang in tests
+   - #14 fix typos in POD
+   - #15 fix tests on non-English locales
+   - #16 increase error severity in call handler
  - Resolve "[PkgVersion] no blank line for $VERSION after package" with dzil prep
  - add skeleton POD for methods
    unhelpfully empty but keeps pod-coverage tests happy
+
+0.0.4     2014-01-22 11:35:18 Europe/London
+ - Fall back to SERVER_NAME if HTTP_HOST is not set (ilmari)
+ - Add 'strict' to FakeModPerl1::Server
 
 0.0.3     2013-06-20 12:02:04 Europe/London
  - add missing 'use Plack::Util' (issue #2)
