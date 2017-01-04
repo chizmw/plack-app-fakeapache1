@@ -1,27 +1,33 @@
-sudo: false
-
+dist: trusty
 language: perl
-
 perl:
-    - "5.20"
-    - "5.18"
-    - "5.16"
-    - "5.14"
-    - "5.12"
-    - "5.10"
-
+- '5.22'
+- 5.20.3
+- 5.18.2
+before_install:
+- git clone git://github.com/haarg/perl-travis-helper
+- source perl-travis-helper/init
+- build-perl
+- perl -V
+- cpan-install Dist::Zilla~6.008
+- git config --global user.email "travis.ci@chizography.net"
+- git config --global user.name "Travis CI"
+- build-dist
+- cd $BUILD_DIR
 install:
-    - cpanm Dist::Zilla
-    - dzil authordeps --missing | cpanm -n
-    - dzil listdeps --missing | cpanm -n
-
+- export RELEASE_TESTING=1 AUTOMATED_TESTING=1 AUTHOR_TESTING=1 HARNESS_OPTIONS=c
+  HARNESS_TIMER=1
+- cpanm --quiet --notest Devel::Cover::Report::Coveralls
+- cpanm --quiet --notest --installdeps .
 script:
-    # work around an issue with the Git::CommitBuild Dist::Zilla plugin,
-    # which requires the git user to be configured on the Travis infrastructure
-    - git config --global user.email "fakeapache1@example.com"
-    - git config --global user.name "Plack App FakeApache1"
-    # install an implicit dependency of the PodCoverageTests plugin
-    - cpanm -n Pod::Coverage::TrustPod
-    # to be implemented once the --author and --release tests pass
-    #- dzil test --author --release
-    - dzil test --noauthor
+- PERL5OPT=-MDevel::Cover=-coverage,statement,branch,condition,path,subroutine prove
+  -lrsv t
+- cover
+after_success:
+- cover -report coveralls
+notifications:
+  slack:
+    secure: AFukCYHWpXOe9ozrMJtZqm6Q973sPL8GBKi4ai+25N6RNjbGguaBTsgFlAKUKzmvv4JfCPwGgg0csX5x/nowoZwYUiE0u/tLIFZmXUS8pxc2OwMmUqHrqxswpAlUQ1taAWgmZywTZdCtfdOg0eHW+yHLr6UIeK0c8yywPE9neUYqIHn18gxTkOioexUySqEEDI6zQtP+Vnqg9Lr5LkY8vg4VtAG3h67iM2+BwlUZGnZRyO77yoxYltJ/skx+ahVg1snJFwnBxXfryvPXH7R49gapvhy1r9sQeqhdqPZoBc8MibBlOgc9Tt6++2Z5ytM0AfI+3i2Uc3PUwC5HkVRTU/F5bucELaOLOEbE0zEw03azrmEegqHp+iqOZHc5jJfNkerkkbrF7hjYyMvupWu0DMW5z2Bikuss8a5d3CncHtdy7zXjZcxBinCp1sru3P3EKG9wFDwa0+FGeyq8zxuMaKqeyXgDzdqC5VyAhpELnP0XBrj60mOnXqZoAQi7wNTkAJyzSkQdHn+sIp2EudL52fSgnEBls2sASqEGTk3uAmnSbO8O06bTnwN8DA6pmUmAnRJAh26l/2fpcQ852in4nTR//rxPyoh/ASAfcl8CvCSktsF4bXIJRDyJhFo4IlEig9tgMvwc0cSOO4hS8M0Tl2JrNmRhL9Uj0BxrbO0a7gw=
+matrix:
+  allow_failures:
+  - perl: blead
