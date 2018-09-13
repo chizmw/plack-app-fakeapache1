@@ -189,11 +189,8 @@ sub _require_handler_module {
 
     say "require($module)"
         if $self->debug;
-    try {
-        eval "require $module";
-        if (my $e=$@) { die $e; }
-    }
-    catch ($e) {
+    eval "require $module";
+    if (my $e=$@) {
         say "failed to require($module): $e";
         warn "failed to require($module): $e";
     }
