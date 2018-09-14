@@ -32,7 +32,6 @@ sub handle_psgi {
     my $env         = shift;
     my $config_file = shift;
     my $plack = Plack::App::FakeModPerl1->new( env => $env );
-    my $session = $env->{'psgix.session'};
 
     # derive where to dispatch to based on <Location>s in apache config
     my $dispatcher = Plack::App::FakeModPerl1::Dispatcher->new(
