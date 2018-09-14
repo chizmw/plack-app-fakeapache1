@@ -1,6 +1,9 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+ - Merged pull-request #17 from @tomhukins
+   - Remove an unused variable
+   - Remove a pointless use of try / catch
 
 0.0.5     2015-11-15 22:41:32+00:00 UTC
 
