@@ -1,6 +1,8 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+
+0.0.6     2018-09-14 12:13:38+01:00 Europe/London
  - Merged pull-request #17 from @tomhukins
    - Remove an unused variable
    - Remove a pointless use of try / catch
